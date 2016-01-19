@@ -1,0 +1,6 @@
+com.gsma.mobileconnect.cache
+com.gsma.mobileconnect.discovery
+com.gsma.mobileconnect.helpers
+com.gsma.mobileconnect.impl
+com.gsma.mobileconnect.oidc
+com.gsma.mobileconnect.utils
