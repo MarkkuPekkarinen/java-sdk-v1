@@ -61,12 +61,23 @@ public class RestClient
     {
         String host = URIUtils.extractHost(uriForRealm).getHostName();
         int port = uriForRealm.getPort();
+        if(port==-1)
+        {
+            if(Constants.HTTP_SCHEME.equalsIgnoreCase(uriForRealm.getScheme()))
+            {
+                port = Constants.HTTP_PORT;
+            }
+            else if(Constants.HTTPS_SCHEME.equalsIgnoreCase(uriForRealm.getScheme()))
+            {
+                port = Constants.HTTPS_PORT;
+            }
+        }
 
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(new AuthScope(host, port), new UsernamePasswordCredentials(username, password));
 
         AuthCache authCache = new BasicAuthCache();
-        authCache.put(new HttpHost(host, port), new BasicScheme());
+        authCache.put(new HttpHost(host, port, uriForRealm.getScheme()), new BasicScheme());
 
         HttpClientContext context = HttpClientContext.create();
         context.setCredentialsProvider(credentialsProvider);

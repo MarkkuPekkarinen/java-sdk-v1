@@ -107,4 +107,9 @@ public class Constants
 
     public static final long MINIMUM_TTL_MS = 5*60*1000; // 5 minutes
     public static final long MAXIMUM_TTL_MS = 180L*24*60*60*1000; // 180 days
+
+    public static final String HTTP_SCHEME = "http";
+    public static final int HTTP_PORT = 80;
+    public static final String HTTPS_SCHEME = "https";
+    public static final int HTTPS_PORT = 443;
 }

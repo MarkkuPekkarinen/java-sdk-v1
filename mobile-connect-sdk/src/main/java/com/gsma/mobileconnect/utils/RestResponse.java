@@ -94,7 +94,12 @@ public class RestResponse
             {
                 if(Constants.CONTENT_TYPE_HEADER_NAME.equalsIgnoreCase(kvp.getKey()))
                 {
-                    jsonContent = Constants.ACCEPT_JSON_HEADER_VALUE.equalsIgnoreCase(kvp.getValue());
+                    String value = kvp.getValue();
+                    if(StringUtils.isNullOrEmpty(value))
+                    {
+                        continue;
+                    }
+                    jsonContent = value.contains(Constants.ACCEPT_JSON_HEADER_VALUE);
                     break;
                 }
             }
