@@ -20,10 +20,12 @@ package com.gsma.mobileconnect.utils;
 /**
  * Exception thrown when an expected field is not found while parsing a Json object.
  */
-class NoFieldException
+public class NoFieldException
     extends Exception
 {
-    public NoFieldException(String fieldName)
+	private static final long serialVersionUID = 1L;
+
+	public NoFieldException(String fieldName)
     {
         super(fieldName);
     }
