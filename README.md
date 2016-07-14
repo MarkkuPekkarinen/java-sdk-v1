@@ -1,31 +1,28 @@
 GSMA MobileConnect Java SDK
 ==============================================================================================================
 
-- Example of GSMA MobileConnect SDK Integration in Java application
-- This demo provides a complete code example for completing the authorization flow of MobileConnect
-- Demo code is only for example purposes
+Mobile Connect is a mobile identity service based on the OpenID Connect & OAuth2 where end users can authenticate themselves using their mobile phone via Mobile Connect. This allows them access to websites and applications without the need to remember passwords and usernames. It’s safe, secure and no personal information is shared without their permission.
 
-Minimum Requirements
------------------
+## Minimum Requirements
+
 MobileConnect supports Java 1.5, and is dependent upon Jackson Databind 2.6.3 and Apache HTTP Client 4.5.1.
 
-Getting Started
------------------
+## Getting Started
+
 You must have first registered an account on the [MobileConnect Developer Site](https://developer.mobileconnect.io) and created an application to get your sandbox credentials.
 
-Using the credentials from your account page replace the credentials in com.gsma.mobileconnect.demo.App.
+## Using The SDK
 
-Build and run the application.
-
-Using The SDK
----------------
-Install the SDK to your local [Maven](https://maven.apache.org/) repository.
+Build the SDK using [Maven](https://maven.apache.org/) repository.
 
 ```posh
+cd mobile-connect-sdk
 mvn clean install
 ```
 
-Configure your MobileConnect options within App.java
+Import the generated mobile-connect-sdk-1.0.0-jar into your java project.
+
+You will need to specify your credentials via an instance of MobileConnectConfig.
 
 ```java
 MobileConnectConfig mobileConnectConfig = new MobileConnectConfig();
@@ -35,17 +32,28 @@ mobileConnectConfig.setApplicationURL("http://localhost:8080/mobile_connect");
 mobileConnectConfig.setDiscoveryURL("http://discovery.sandbox2.mobileconnect.io/v2/discovery");
 ```
 
-Please reference the demo application for an example of how to use the SDK.
+You must create instances of both IDiscovery and IOIDC.  Factory can help with this.
 
-## Demo Application
-
-Run the MobileConnect demo.
-
-```posh
-mvn spring-boot:run
+```java
+IDiscovery discovery = Factory.getDiscovery(Factory.getDefaultDiscoveryCache());
+IOIDC oidc = Factory.getOIDC();
 ```
 
-Then navigate to http://localhost:8080 in your browser.
+The main entry point to start the authorisation process is via the MobileConnectInterface class.
+
+```java
+MobileConnectStatus status;
+
+status = MobileConnectInterface.callMobileConnectForStartDiscovery(discovery, config, servletRequest, servletResponse)
+...
+status = MobileConnectInterface.callMobileConnectOnDiscoveryRedirect(discovery, config, servletRequest, servletResponse);
+...
+status = MobileConnectInterface.callMobileConnectForStartAuthorization(oidc, config, servletRequest);
+...
+status = MobileConnectInterface.callMobileConnectOnAuthorizationRedirect(oidc, config, servletRequest);
+```
+
+Please reference the [demo application](mobile-connect-demo/) for a complete example of how to use the SDK.
 
 ## Support
 
