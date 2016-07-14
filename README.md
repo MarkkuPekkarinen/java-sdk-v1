@@ -5,8 +5,8 @@ Mobile Connect is a mobile identity service based on the OpenID Connect & OAuth2
 
 ## Quick Start
 
-- Build the [mobile-connect-sdk](SDK)
-- Build and run the [mobile-connect-demo](demo)
+- Build the [SDK](./mobile-connect-sdk/)
+- Build and run the [demo](./mobile-connect-demo/)
 
 ## Support
 
