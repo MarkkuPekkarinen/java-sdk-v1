@@ -25,7 +25,7 @@ Import the generated mobile-connect-sdk-1.0.0-jar into your java project.
 You will need to specify your credentials via an instance of MobileConnectConfig.
 
 ```java
-MobileConnectConfig mobileConnectConfig = new MobileConnectConfig();
+MobileConnectConfig config = new MobileConnectConfig();
 mobileConnectConfig.setClientId("944b6cfd-8386-4817-8567-7e444e188e48");
 mobileConnectConfig.setClientSecret("5440107a-1f4a-4cf6-8226-94443de6692f");
 mobileConnectConfig.setApplicationURL("http://localhost:8080/mobile_connect");
